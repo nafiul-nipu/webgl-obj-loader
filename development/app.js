@@ -12,14 +12,14 @@ app.mvMatrix = mat4.create();
 app.mvMatrixStack = [];
 app.pMatrix = mat4.create();
 
-window.requestAnimFrame = (function() {
+window.requestAnimFrame = (function () {
     return (
         window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame ||
-        function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+        function (/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
             return window.setTimeout(callback, 1000 / 60);
         }
     );
@@ -29,7 +29,7 @@ function initWebGL(canvas) {
     try {
         // Try to grab the standard context. If it fails, fallback to experimental.
         gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    } catch (e) {}
+    } catch (e) { }
     if (!gl) {
         alert("Unable to initialize WebGL. Your browser may not support it.");
         gl = null;
@@ -109,8 +109,8 @@ function initShaders() {
         } else {
             console.warn(
                 'Shader attribute "' +
-                    attrName +
-                    '" not found in shader. Is it undeclared or unused in the shader code?'
+                attrName +
+                '" not found in shader. Is it undeclared or unused in the shader code?'
             );
         }
     }
@@ -119,7 +119,7 @@ function initShaders() {
     shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
     shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "uNMatrix");
 
-    shaderProgram.applyAttributePointers = function(model) {
+    shaderProgram.applyAttributePointers = function (model) {
         const layout = model.mesh.vertexBuffer.layout;
         for (const attrName in attrs) {
             if (!attrs.hasOwnProperty(attrName) || shaderProgram.attrIndices[attrName] == -1) {
@@ -260,7 +260,7 @@ function webGLStart(meshes) {
     //    drawScene();
 }
 
-window.onload = function() {
+window.onload = function () {
     // OBJ.downloadMeshes({
     //     'suzanne': '/development/models/suzanne.obj'
     // }, webGLStart);
@@ -269,13 +269,17 @@ window.onload = function() {
             name: "die",
             obj: "/development/models/die.obj",
             mtl: "/development/models/die.mtl"
-        },
-        {
-            obj: "/development/models/suzanne.obj",
-            mtl: true
-        } // ,
+        }//,
+        // {
+        //     obj: "/development/models/suzanne.obj",
+        //     mtl: true
+        // } // ,
         // {
         // obj: '/development/models/suzanne.obj'
+        // },
+        // {
+        //     obj: '/development/models/brain.obj',
+        //     mtl: false
         // }
     ]);
 
